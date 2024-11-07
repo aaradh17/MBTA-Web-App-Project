@@ -1,4 +1,11 @@
+import json
 import os
+import pprint
+import urllib.request
+
+
+print(mbta_helper.find_stop_near("Boston Common"))
+#Beacon St opp Walnut st
 
 from dotenv import load_dotenv
 
@@ -60,3 +67,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+#
