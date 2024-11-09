@@ -9,10 +9,16 @@ app = Flask(__name__)
 
 
 @app.route("/")
+def index():
+    return render_template('index.html')
 def hello():
     return "Hello World!"
 
-
+@app.route('/nearest_mbta', methods=['POST'])
+def nearest_mbta():
+    address = request.form.get('address')
+    stop_name, accessible = find_nearest_mbta_stop(address)
+    return render_template('mbta_station.html', stop_name=stop_name, accessible=accessible)
 
 
 
