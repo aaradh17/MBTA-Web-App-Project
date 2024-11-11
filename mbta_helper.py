@@ -1,9 +1,16 @@
 import os
+import json
+import pprint
+import urllib.request
 
 from dotenv import load_dotenv
 
+import mbta_helper
+
 # Load environment variables
 load_dotenv()
+
+print(mbta_helper.find_stop_near("Boston Common"))
 
 # Get API keys from environment variables
 MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
