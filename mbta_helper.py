@@ -1,8 +1,8 @@
 import json
 import os
-import json
 import pprint
 import urllib.request
+import certifi
 
 from dotenv import load_dotenv
 
@@ -11,7 +11,7 @@ import mbta_helper
 # Load environment variables
 load_dotenv()
 
-print(mbta_helper.find_stop_near("Boston Common"))
+print(mbta_helper.find_nearest_mbta_stop("Boston Common"))
 
 # Get API keys from environment variables
 MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
@@ -21,13 +21,6 @@ MBTA_API_KEY = os.getenv("MBTA_API_KEY")
 MAPBOX_BASE_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places"
 MBTA_BASE_URL = "https://api-v3.mbta.com/stops"
 
-query = "Babson College"
-query = query.replace(" ", "%20") # In URL encoding, spaces are typically replaced with "%20". You can also use `urllib.parse.quote` function. 
-url=f"{MAPBOX_BASE_URL}/{query}.json?access_token={MAPBOX_TOKEN}&types=poi"
-print(url) # Try this URL in your browser first
-
-
-
 def get_coordinates(address):
     query = urllib.parse.quote(address)
     url = f"{MAPBOX_BASE_URL}/{query}.json?access_token={MAPBOX_TOKEN}&types=poi"
@@ -35,6 +28,7 @@ def get_coordinates(address):
         data = json.loads(resp.read().decode("utf-8"))
         coordinates = data["features"][0]["geometry"]["coordinates"]
         return coordinates[1], coordinates[0]  # lat, lon
+
 
 def get_nearest_stop(lat, lon):
     url = f"{MBTA_BASE_URL}?sort=distance&filter[latitude]={lat}&filter[longitude]={lon}&api_key={MBTA_API_KEY}"
@@ -45,12 +39,11 @@ def get_nearest_stop(lat, lon):
         wheelchair_accessible = stop["attributes"]["wheelchair_boarding"] == 1
         return stop_name, wheelchair_accessible
 
+
 def find_nearest_mbta_stop(address):
+    """"""
     lat, lon = get_coordinates(address)
     return get_nearest_stop(lat, lon)
-
-
-
 
 
 # A little bit of scaffolding if you want to use it
@@ -94,9 +87,17 @@ def main():
     """
     You should test all the above functions here
     """
-    pass
+    query = "Boston Common"
+    query = query.replace(
+        " ", "%20"
+    )  # In URL encoding, spaces are typically replaced with "%20". You can also use `urllib.parse.quote` function.
+
+    # lat, lng = get_coordinates(query)
+    # # print(lat, lng)
+    # stop_info = get_nearest_stop(lat, lng)
+    # print(stop_info)
+    print(find_nearest_mbta_stop(query))
 
 
 if __name__ == "__main__":
     main()
-

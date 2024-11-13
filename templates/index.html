@@ -1,20 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hi</title>
-  </head>
+    <title>MBTA Station Finder</title>
+    <style>
+        /* Apply a background color to the whole page */
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
 
-  <body>
+        /* Style the heading */
+        h1 {
+            color: #4a90e2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Style the paragraph */
+        p {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            max-width: 500px;
+        }
+
+        /* Style the form */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        /* Style the input field */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Style the button */
+        button {
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        /* Style the image */
+        .mbta-map {
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Add the MBTA Map Image -->
+    <img src="/mnt/data/CommuterRailMap-2022-v.37-8x8.webp" alt="MBTA Commuter Rail Map" class="mbta-map">
+
     <h1>Hi</h1>
-    <p>This is an amazing app to help you find the nearest MBTA station</p>
-  </body>
+    <p>This is an amazing app to help you find the nearest MBTA station.</p>
+
+    <form action="/nearest_mbta" method="post">
+        <label for="address">Enter a place name:</label>
+        <input type="text" id="address" name="address" required />
+        <button type="submit">Find Nearest MBTA Stop</button>
+    </form>
+</body>
 </html>
 
-<form action="/nearest_mbta" method="post">
-  <label for="address">Enter a place name:</label>
-  <input type="text" id="address" name="address" required>
-  <button type="submit">Find Nearest MBTA Stop</button>
-</form>
