@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request, url_for
 import mbta_helper
 
-print(mbta_helper.find_stop_near("Boston Common"))
+print(mbta_helper.find_nearest_mbta_stop("Boston Common"))
 # Beacon St opp Walnut St
 
 app = Flask(__name__)
@@ -34,7 +34,7 @@ def nearest_mbta():
         return redirect(url_for("index"))
 
 
-print(mbta_helper.find_stop_near("Boston Common"))
+print(mbta_helper.find_nearest_mbta_stop("Boston Common"))
 
 if __name__ == "__main__":
     app.run(debug=True)
